@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════
+   css/index.css — Design System & Reset
+   Retro "Prometheus" Palette
+═══════════════════════════════════════════ */
+
+/* ─── Custom Properties ─── */
+:root {
+  --deep-teal:  #244855;
+  --coral-red:  #E64833;
+  --warm-brown: #874F41;
+  --muted-sage: #90AEAD;
+  --warm-cream: #FBE9D0;
+
+  --bg-light:   var(--warm-cream);
+  --bg-dark:    var(--deep-teal);
+  --bg-darker:  #1a3540;
+  --bg-warm:    #f0dfc0;      /* warm amber — blue-free section bg */
+  --accent:     var(--coral-red);
+  --accent-dk:  #c93d29;
+  --sage:       var(--muted-sage);
+  --tan:        #a07050;      /* warm tan — replaces sage on light bg */
+
+  --shadow-sm:  3px 3px 0 var(--warm-brown);
+  --shadow-md:  5px 5px 0 var(--warm-brown);
+  --shadow-lg:  7px 7px 0 var(--warm-brown);
+
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease: 0.22s cubic-bezier(.4,0,.2,1);
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg-light);
+  color: var(--deep-teal);
+  overflow-x: hidden;
+  line-height: 1.65;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+p { font-size: 1rem; line-height: 1.75; }
+
+/* ─── Container ─── */
+.container {
+  width: min(92%, 1160px);
+  margin-inline: auto;
+}
+
+/* ─── Text helpers ─── */
+.text-center { text-align: center; }
