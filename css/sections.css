@@ -477,7 +477,7 @@ section { padding: 6rem 0; }
    Outer wrapper is tall; inner is sticky vh
 ══════════════════════════════════════════ */
 #video-scroll {
-  height: 300vh;  /* tall = long scroll distance */
+  height: 150vh;  /* shorter = faster video playthrough */
   position: relative;
 }
 .vscroll-sticky {
