@@ -709,91 +709,83 @@ section { padding: 6rem 0; }
 }
 
 /* ══════════════════════
-   FEATURED PROJECTS (reference-style horizontal cards)
+   FEATURED PROJECTS (reference-style horizontal)
 ══════════════════════ */
 .feat-grid {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-
-/* ─ Card-level: just opacity wrapper (children do the movement) ─ */
-.fp-reveal {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.fp-reveal.fp-visible { opacity: 1; }
-
-/* ─ Text column: slides from LEFT (right for reversed cards) ─ */
-.fp-text {
-  opacity: 0;
-  transform: translateX(-52px);
-  transition: opacity 0.7s cubic-bezier(.22,1,.36,1),
-              transform 0.7s cubic-bezier(.22,1,.36,1);
-}
-.fp-card--reverse .fp-text {
-  transform: translateX(52px);
-}
-.fp-text.fp-col-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* ─ Preview column: slides from RIGHT (left for reversed cards) ─ */
-.fp-preview {
-  opacity: 0;
-  transform: translateX(52px);
-  transition: opacity 0.75s cubic-bezier(.22,1,.36,1),
-              transform 0.75s cubic-bezier(.22,1,.36,1),
-              box-shadow 0.4s ease;
-}
-.fp-card--reverse .fp-preview {
-  transform: translateX(-52px);
-}
-.fp-preview.fp-col-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* ─ Children of text: fade up one by one ─ */
-.fp-num, .fp-title, .fp-desc, .fp-tags, .fp-actions {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s cubic-bezier(.22,1,.36,1),
-              transform 0.55s cubic-bezier(.22,1,.36,1);
-}
-.fp-num.fp-item-visible,
-.fp-title.fp-item-visible,
-.fp-desc.fp-item-visible,
-.fp-tags.fp-item-visible,
-.fp-actions.fp-item-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─ Separator line (like reference) ─ */
+.fp-card { padding: 0 0 3rem; }
 .fp-separator {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(251,233,208,0.15), transparent);
   margin-bottom: 3rem;
 }
-
-/* ─ Card wrapper ─ */
-.fp-card { padding: 0 0 3rem; }
-
-/* ─ Inner 2-col grid ─ */
 .fp-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
-.fp-card--reverse .fp-inner {
-  direction: rtl;
+.fp-card--reverse .fp-inner   { direction: rtl; }
+.fp-card--reverse .fp-inner > * { direction: ltr; }
+
+/* ┌────────── ANIMATION SYSTEM ──────────────────────────
+   JS only adds .fp-visible to the .fp-card element.
+   CSS parent selectors animate every child automatically.
+   transition-delay staggers them without any JS timing.
+└─────────────────────────────────────────────────────── */
+
+/* text col: hidden off-left by default */
+.fp-text {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1),
+              transform 0.7s cubic-bezier(.22,1,.36,1);
+  transition-delay: 0ms;
 }
-.fp-card--reverse .fp-inner > * {
-  direction: ltr;
+.fp-card--reverse .fp-text { transform: translateX(48px); }
+.fp-card.fp-visible .fp-text {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
 }
+
+/* staggered children inside text */
+.fp-num {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
+  transition-delay: 80ms;
+}
+.fp-card.fp-visible .fp-num { opacity: 1 !important; transform: translateY(0) !important; }
+
+.fp-title {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1);
+  transition-delay: 160ms;
+}
+.fp-card.fp-visible .fp-title { opacity: 1 !important; transform: translateY(0) !important; }
+
+.fp-desc {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1);
+  transition-delay: 240ms;
+}
+.fp-card.fp-visible .fp-desc { opacity: 1 !important; transform: translateY(0) !important; }
+
+.fp-tags {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
+  transition-delay: 310ms;
+}
+.fp-card.fp-visible .fp-tags { opacity: 1 !important; transform: translateY(0) !important; }
+
+.fp-actions {
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
+  transition-delay: 380ms;
+}
+.fp-card.fp-visible .fp-actions { opacity: 1 !important; transform: translateY(0) !important; }
 
 /* ─ Text column ─ */
 .fp-num {
@@ -882,18 +874,31 @@ section { padding: 6rem 0; }
   box-shadow: 3px 3px 0 rgba(135,79,65,0.6);
 }
 
-/* ─ Preview / code panel ─ */
+/* Preview / code panel — layout + animation merged */
 .fp-preview {
   border-radius: var(--r-lg);
   overflow: hidden;
   border: 1.5px solid rgba(251,233,208,0.1);
   background: #0d0705;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.4s ease;
   position: relative;
+  /* Animation: hidden + off-right */
+  opacity: 0;
+  transform: translateX(56px);
+  transition: opacity 0.75s cubic-bezier(.22,1,.36,1),
+              transform 0.75s cubic-bezier(.22,1,.36,1),
+              box-shadow 0.4s ease;
+  transition-delay: 120ms;
 }
-.fp-card:hover .fp-preview {
-  transform: translateY(-6px) scale(1.015);
+.fp-card--reverse .fp-preview { transform: translateX(-56px); }
+/* Visible */
+.fp-card.fp-visible .fp-preview {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+/* Hover lift (only when already visible) */
+.fp-card.fp-visible:hover .fp-preview {
+  transform: translateY(-6px) scale(1.015) !important;
   box-shadow: 0 32px 80px rgba(0,0,0,0.6),
               0 0 0 1px var(--fp-color, rgba(251,233,208,0.15));
 }

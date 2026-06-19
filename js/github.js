@@ -83,47 +83,25 @@
       </div>`;
     }).join('');
 
-    // Robust split-column scroll animation (like Framer Motion whileInView)
+    // Animation: JS adds fp-visible to card; CSS handles all children
     const setupAnimations = () => {
-      const cards = featGrid.querySelectorAll('.fp-reveal');
+      const cards = featGrid.querySelectorAll('.fp-card');
       if (!cards.length) return;
 
       const obs = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
-          const card = entry.target;
-          const idx  = +card.dataset.index;
-          const delay = idx * 120; // stagger between cards
-
-          // Animate text and preview columns separately
-          const textCol    = card.querySelector('.fp-text');
-          const previewCol = card.querySelector('.fp-preview');
-          const isReverse  = card.classList.contains('fp-card--reverse');
-
-          setTimeout(() => {
-            card.classList.add('fp-visible');
-            if (textCol) textCol.classList.add('fp-col-visible');
-          }, delay);
-
-          setTimeout(() => {
-            if (previewCol) previewCol.classList.add('fp-col-visible');
-          }, delay + 180);
-
-          // Stagger the children inside text
-          const staggerItems = card.querySelectorAll('.fp-num, .fp-title, .fp-desc, .fp-tags, .fp-actions');
-          staggerItems.forEach((el, i) => {
-            setTimeout(() => el.classList.add('fp-item-visible'), delay + 60 + i * 80);
-          });
-
-          obs.unobserve(card);
+          // Stagger between cards via a small JS delay
+          const delay = (+entry.target.dataset.index || 0) * 100;
+          setTimeout(() => entry.target.classList.add('fp-visible'), delay);
+          obs.unobserve(entry.target);
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
       cards.forEach(c => obs.observe(c));
     };
 
-    // Small delay ensures DOM is painted before observing
-    setTimeout(setupAnimations, 80);
+    setTimeout(setupAnimations, 100);
   };
 
   /* ── Render project cards (reference-style) ── */
