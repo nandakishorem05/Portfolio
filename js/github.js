@@ -98,10 +98,7 @@
 
   /* ── Populate stats sidebar ── */
   const populateStats = repos => {
-    const stars   = repos.reduce((s, r) => s + r.stargazers_count, 0);
-    const forks   = repos.reduce((s, r) => s + r.forks_count, 0);
-    const langs   = new Set(repos.map(r => r.language).filter(Boolean)).size;
-
+    const langs = new Set(repos.map(r => r.language).filter(Boolean)).size;
     animCount('stat-repos', repos.length);
     animCount('stat-langs', langs);
   };
