@@ -83,18 +83,47 @@
       </div>`;
     }).join('');
 
-    // Scroll-triggered stagger animation
-    const cards = featGrid.querySelectorAll('.fp-reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = +entry.target.dataset.index;
-          setTimeout(() => entry.target.classList.add('fp-visible'), idx * 160);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    cards.forEach(c => obs.observe(c));
+    // Robust split-column scroll animation (like Framer Motion whileInView)
+    const setupAnimations = () => {
+      const cards = featGrid.querySelectorAll('.fp-reveal');
+      if (!cards.length) return;
+
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const card = entry.target;
+          const idx  = +card.dataset.index;
+          const delay = idx * 120; // stagger between cards
+
+          // Animate text and preview columns separately
+          const textCol    = card.querySelector('.fp-text');
+          const previewCol = card.querySelector('.fp-preview');
+          const isReverse  = card.classList.contains('fp-card--reverse');
+
+          setTimeout(() => {
+            card.classList.add('fp-visible');
+            if (textCol) textCol.classList.add('fp-col-visible');
+          }, delay);
+
+          setTimeout(() => {
+            if (previewCol) previewCol.classList.add('fp-col-visible');
+          }, delay + 180);
+
+          // Stagger the children inside text
+          const staggerItems = card.querySelectorAll('.fp-num, .fp-title, .fp-desc, .fp-tags, .fp-actions');
+          staggerItems.forEach((el, i) => {
+            setTimeout(() => el.classList.add('fp-item-visible'), delay + 60 + i * 80);
+          });
+
+          obs.unobserve(card);
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+      cards.forEach(c => obs.observe(c));
+    };
+
+    // Small delay ensures DOM is painted before observing
+    setTimeout(setupAnimations, 80);
   };
 
   /* ── Render project cards (reference-style) ── */
