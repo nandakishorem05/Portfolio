@@ -238,8 +238,9 @@ section { padding: 6rem 0; }
 }
 .gallery-image {
   width: 100%;
-  height: 400px;
+  height: 480px;
   object-fit: cover;
+  object-position: top center;
   display: block;
   transition: opacity 0.3s ease;
 }
@@ -1096,6 +1097,261 @@ section { padding: 6rem 0; }
   background: rgba(230,72,51,0.05);
 }
 
+/* ══════════════════════
+   FEATURED PROJECT — GrabU
+══════════════════════ */
+.grabu-showcase {
+  position: relative;
+  background: linear-gradient(145deg, rgba(251,233,208,0.04), rgba(251,233,208,0.02));
+  border: 2px solid rgba(144,174,173,0.22);
+  border-radius: var(--r-lg);
+  padding: 2.5rem;
+  overflow: hidden;
+  transition: border-color var(--ease);
+}
+.grabu-showcase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, #2ecc71, #27ae60, #f39c12, #e67e22);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+.grabu-showcase:hover {
+  border-color: rgba(46,204,113,0.45);
+}
+
+/* Launch Badge */
+.grabu-launch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(46,204,113,0.12);
+  border: 1.5px solid rgba(46,204,113,0.35);
+  border-radius: 100px;
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2ecc71;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+.launch-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2ecc71;
+  animation: launchPulse 1.5s ease-in-out infinite;
+}
+@keyframes launchPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(46,204,113,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(46,204,113,0); }
+}
+
+/* Header */
+.grabu-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.grabu-name {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--warm-cream);
+  line-height: 1.1;
+}
+.grabu-accent {
+  color: #2ecc71;
+}
+.grabu-tagline {
+  font-size: 0.95rem;
+  color: var(--muted-sage);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+.grabu-version {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(251,233,208,0.5);
+  padding: 0.3rem 0.75rem;
+  border: 1.5px solid rgba(144,174,173,0.2);
+  border-radius: 100px;
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* Description */
+.grabu-desc {
+  font-size: 0.95rem;
+  color: rgba(251,233,208,0.75);
+  line-height: 1.75;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+/* Metrics */
+.grabu-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.grabu-metric {
+  text-align: center;
+  padding: 1.2rem 0.75rem;
+  background: rgba(46,204,113,0.06);
+  border: 1.5px solid rgba(46,204,113,0.18);
+  border-radius: var(--r-md);
+  transition: transform var(--ease), border-color var(--ease);
+}
+.grabu-metric:hover {
+  transform: translateY(-3px);
+  border-color: rgba(46,204,113,0.45);
+}
+.grabu-metric-num {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2ecc71;
+  line-height: 1.2;
+}
+.grabu-metric-label {
+  font-size: 0.72rem;
+  color: var(--muted-sage);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Three-App Cards */
+.grabu-apps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.grabu-app-card {
+  background: rgba(251,233,208,0.04);
+  border: 1.5px solid rgba(144,174,173,0.18);
+  border-radius: var(--r-md);
+  padding: 1.5rem;
+  transition: all var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.grabu-app-card:hover {
+  border-color: #2ecc71;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+.grabu-app-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.25rem;
+}
+.grabu-app-card h4 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--warm-cream);
+}
+.grabu-app-card p {
+  font-size: 0.85rem;
+  color: rgba(251,233,208,0.62);
+  line-height: 1.6;
+  flex: 1;
+}
+.grabu-app-platform {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2ecc71;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+}
+
+/* Tech Stack */
+.grabu-tech {
+  margin-bottom: 2rem;
+}
+.grabu-tech-title {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted-sage);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+.grabu-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.grabu-pill {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: rgba(46,204,113,0.08);
+  border: 1.5px solid rgba(46,204,113,0.2);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-head);
+  color: #2ecc71;
+  transition: all var(--ease);
+}
+.grabu-pill:hover {
+  background: rgba(46,204,113,0.18);
+  border-color: rgba(46,204,113,0.5);
+  transform: scale(1.05);
+}
+
+/* Key Features */
+.grabu-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.grabu-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: rgba(251,233,208,0.03);
+  border: 1.5px solid rgba(144,174,173,0.12);
+  border-radius: var(--r-md);
+  transition: border-color var(--ease);
+}
+.grabu-feature:hover {
+  border-color: rgba(46,204,113,0.3);
+}
+.grabu-feature-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.grabu-feature strong {
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  color: var(--warm-cream);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.grabu-feature p {
+  font-size: 0.85rem;
+  color: rgba(251,233,208,0.6);
+  line-height: 1.55;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
   .hero-content {
@@ -1116,6 +1372,11 @@ section { padding: 6rem 0; }
   .feat-grid { grid-template-columns: 1fr; }
   .contrib-wrap { grid-template-columns: 1fr; }
   .contrib-stats { grid-template-columns: 1fr 1fr; min-width: unset; }
+
+  .grabu-showcase { padding: 1.75rem; }
+  .grabu-metrics { grid-template-columns: repeat(2, 1fr); }
+  .grabu-apps { grid-template-columns: 1fr; }
+  .grabu-header { flex-direction: column; }
 }
 @media (max-width: 720px) {
   .feat-grid { grid-template-columns: 1fr; }
@@ -1126,4 +1387,9 @@ section { padding: 6rem 0; }
   .cert-grid { grid-template-columns: 1fr; }
   .vscroll-quote { font-size: 1.25rem; }
   .about-stats { gap: 1rem; }
+
+  .grabu-metrics { grid-template-columns: 1fr 1fr; }
+  .grabu-showcase { padding: 1.25rem; }
+  .grabu-name { font-size: 1.8rem; }
 }
+
