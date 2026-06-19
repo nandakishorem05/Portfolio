@@ -4,9 +4,7 @@
     'assets/Nandu 2.png',
     'assets/Nandu coding.png',
     'assets/photo1.jpeg',
-    'assets/photo2.jpeg',
-    'assets/photo3.jpeg',
-    'assets/photo4.jpeg'
+    'assets/photo2.jpeg'
   ];
   const container = document.getElementById('gallery');
   let idx = 0;
@@ -52,7 +50,7 @@
 
   const startAuto = () => {
     clearInterval(autoTimer);
-    autoTimer = setInterval(() => change(1), 3000);
+    autoTimer = setInterval(() => change(1), 2000);
   };
 
   render();
