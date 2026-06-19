@@ -1,12 +1,9 @@
-// js/contact.js – EmailJS client-side contact form handler
+// js/contact.js – Contact form handler using Formsubmit.co
+// Sends messages directly to nandakishorem05@gmail.com (no API key needed)
 (() => {
   const form = document.getElementById('contact-form');
+  if (!form) return;
   const submitBtn = form.querySelector('button[type="submit"]');
-
-  // 👉 Replace these with your real EmailJS credentials at emailjs.com
-  const SERVICE_ID  = 'YOUR_SERVICE_ID';
-  const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-  const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
 
   const showToast = (msg, success = true) => {
     const existing = document.getElementById('toast');
@@ -23,45 +20,64 @@
       font-size: 0.95rem; font-weight: 600;
       box-shadow: 4px 4px 0 #874F41;
       z-index: 9999; animation: fadeIn 0.3s ease;
-      max-width: 320px;
+      max-width: 360px;
     `;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 4000);
+    setTimeout(() => toast.remove(), 5000);
   };
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending…';
+    // Basic validation
+    const name = form.elements['name'].value.trim();
+    const email = form.elements['email'].value.trim();
+    const subject = form.elements['subject'].value.trim();
+    const message = form.elements['message'].value.trim();
+
+    if (!name || !email || !subject || !message) {
+      showToast('❌ Please fill in all fields.', false);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showToast('❌ Please enter a valid email address.', false);
+      return;
+    }
+
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'Sending… ✈️';
     submitBtn.disabled = true;
 
-    const payload = {
-      service_id:    SERVICE_ID,
-      template_id:   TEMPLATE_ID,
-      user_id:       PUBLIC_KEY,
-      template_params: {
-        from_name:  form.elements['name'].value,
-        from_email: form.elements['email'].value,
-        subject:    form.elements['subject'].value,
-        message:    form.elements['message'].value
-      }
-    };
-
     try {
-      const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject);
+      formData.append('message', message);
+      formData.append('_subject', `Portfolio Contact: ${subject}`);
+      formData.append('_captcha', 'false');
+      formData.append('_template', 'table');
+
+      const res = await fetch('https://formsubmit.co/ajax/nandakishorem05@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: formData
       });
-      if (!res.ok) throw new Error(`EmailJS ${res.status}`);
-      showToast('✅ Message sent! I\'ll get back to you soon.');
-      form.reset();
+
+      const data = await res.json();
+
+      if (data.success) {
+        showToast('✅ Message sent! I\'ll get back to you soon.');
+        form.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (err) {
       console.error(err);
-      showToast('❌ Failed to send. Please try again or email me directly.', false);
+      showToast('❌ Failed to send. Please email me directly at nandakishorem05@gmail.com', false);
     } finally {
-      submitBtn.textContent = originalText;
+      submitBtn.innerHTML = originalHTML;
       submitBtn.disabled = false;
     }
   });
