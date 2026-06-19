@@ -6,7 +6,7 @@
 /* ─── Custom Properties ─── */
 :root {
   --deep-teal:  #244855;
-  --coral-red:  #D3D3D3;
+  --coral-red:  #E64833;
   --warm-brown: #874F41;
   --muted-sage: #90AEAD;
   --warm-cream: #FBE9D0;
@@ -16,7 +16,7 @@
   --bg-darker:  #130804;          /* deeper warm dark */
   --bg-warm:    #f0dfc0;          /* warm amber section bg */
   --accent:     var(--coral-red);
-  --accent-dk:  #a8a8a8;
+  --accent-dk:  #c43a28;
   --sage:       var(--muted-sage);
   --tan:        #a07050;
 
