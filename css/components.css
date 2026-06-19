@@ -189,11 +189,17 @@
 #navbar {
   position: fixed;
   top: 0; left: 0; width: 100%;
-  background: var(--bg-dark);
+  background: rgba(20,10,5,0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(251,233,208,0.08);
   z-index: 999;
-  transition: box-shadow var(--ease);
+  transition: box-shadow var(--ease), background var(--ease);
 }
-#navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+#navbar.scrolled {
+  background: rgba(15,7,3,0.92);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
 
 .nav-inner {
   display: flex;

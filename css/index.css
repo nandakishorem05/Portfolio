@@ -12,13 +12,13 @@
   --warm-cream: #FBE9D0;
 
   --bg-light:   var(--warm-cream);
-  --bg-dark:    var(--deep-teal);
-  --bg-darker:  #1a3540;
-  --bg-warm:    #f0dfc0;      /* warm amber — blue-free section bg */
+  --bg-dark:    #1e0e08;          /* warm near-black — replaces cold teal */
+  --bg-darker:  #130804;          /* deeper warm dark */
+  --bg-warm:    #f0dfc0;          /* warm amber section bg */
   --accent:     var(--coral-red);
   --accent-dk:  #c93d29;
   --sage:       var(--muted-sage);
-  --tan:        #a07050;      /* warm tan — replaces sage on light bg */
+  --tan:        #a07050;
 
   --shadow-sm:  3px 3px 0 var(--warm-brown);
   --shadow-md:  5px 5px 0 var(--warm-brown);
