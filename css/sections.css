@@ -21,25 +21,25 @@ section { padding: 6rem 0; }
   padding: 0;
 }
 
-/* Full-cover autoplay video — more visible now */
+/* Full-cover autoplay video — visible but text still readable */
 #hero-video {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  opacity: 0.55;        /* was 0.22 — now clearly visible */
+  opacity: 0.45;
   z-index: 0;
 }
 
-/* Warm dark overlay — no blue, just deep amber-brown */
+/* Warm dark overlay — dark enough for text, warm toned */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(20,10,5,0.72) 0%,
-    rgba(50,22,12,0.60) 50%,
-    rgba(135,79,65,0.35) 100%
+    rgba(15,7,3,0.88) 0%,
+    rgba(35,15,8,0.80) 55%,
+    rgba(100,50,30,0.55) 100%
   );
   z-index: 1;
 }
@@ -67,31 +67,27 @@ section { padding: 6rem 0; }
   padding-bottom: 5rem;
 }
 
-/* Glassmorphism on the text block */
+/* Glassmorphism removed — clean transparent text block */
 .hero-text {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(251,233,208,0.12);
-  border-radius: var(--r-lg);
-  padding: 2.25rem 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+  /* no background, no blur */
 }
 
 .hero-greeting {
-  font-size: 0.95rem;
-  color: var(--muted-sage);
+  font-size: 1rem;
+  color: var(--warm-cream);
   font-weight: 500;
   margin-bottom: 0.4rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
 }
 .hero-name {
   font-family: var(--font-head);
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 700;
-  color: var(--warm-cream);
+  color: #ffffff;
   line-height: 1.1;
   margin-bottom: 0.5rem;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 .hero-role-wrap {
   min-height: 2.4rem;
@@ -111,11 +107,12 @@ section { padding: 6rem 0; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .hero-bio {
-  color: rgba(251,233,208,0.68);
-  font-size: 0.92rem;
+  color: rgba(251,233,208,0.88);
+  font-size: 0.95rem;
   margin-bottom: 1.8rem;
   line-height: 1.7;
-  max-width: 430px;
+  max-width: 480px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
 
