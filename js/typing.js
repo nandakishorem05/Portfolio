@@ -1,12 +1,13 @@
 // js/typing.js – Rotating typewriter effect for hero subtitle
 (() => {
   const roles = [
+    'Founder of GrabU',
     'Full-Stack MERN Developer',
     'AI-Powered Developer',
     'Web & Web App Developer',
     'Data Scientist'
   ];
-  const subtitle = document.getElementById('subtitle');
+  const subtitle = document.getElementById('typed-text');
   let idx = 0;
   let typeTimer = null;
 
